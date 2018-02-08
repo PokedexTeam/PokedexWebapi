@@ -54,6 +54,12 @@
                     .AllowAnyHeader()
                     .AllowAnyMethod());
 
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<PokedexContext>();
+                context.Database.EnsureCreated();
+            }
+
             app.UseMvc();
 
             app.UseSwagger();
