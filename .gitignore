@@ -40,10 +40,6 @@ TestResult.xml
 [Rr]eleasePS/
 dlldata.c
 
-# Docker
-Dockerfile
-docker-compose.yml
-
 # Mysql volume
 mysql-data/
 
