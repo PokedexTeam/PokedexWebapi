@@ -10,9 +10,8 @@ Api to practice automated testing
     # https://www.microsoft.com/net/learn/get-started/macos 
 ## Install Visual Studio Code (Or use IDE of preference)
     # https://code.visualstudio.com/
-    
-    ## Clone Pokedex-Api
+## Install Docker
+    # https://docs.docker.com/install/    
+## Run Pokedex-Api
     # 'git clone https://github.com/Saetabis1/Pokedex-Api.git' where you want to place repository
-    ## Run Api
-    # Stand in Pokedex.Webapi folder in any terminal
-    # Type 'dotnet run' and hit enter
+    # Execute Run.sh file
