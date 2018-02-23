@@ -2,6 +2,7 @@
 
 namespace Pokedex.Repositories.Models
 {
+    [Table("pokemontopokemontype")]
     public class PokemonToPokemonType : IModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

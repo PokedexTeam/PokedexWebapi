@@ -1,5 +1,6 @@
 ﻿namespace Pokedex.Migrations
 {
+    using DbUp;
     using Microsoft.Extensions.Configuration;
     using System;
     using System.IO;

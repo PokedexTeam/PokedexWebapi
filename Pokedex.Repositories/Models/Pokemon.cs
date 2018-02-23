@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations.Schema;
 
+    [Table("pokemons")]
     public class Pokemon : ISimpleModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -3,6 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    [Table("pokemontype")]
     public class PokemonType : ISimpleModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
