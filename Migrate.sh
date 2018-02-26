@@ -1,2 +1,3 @@
-cd Pokedex.Migrations/
-dotnet run
+docker start pokedexwebapi_migrator_1
+docker stop pokedexwebapi_migrator_1
+docker rm pokedexwebapi_migrator_1

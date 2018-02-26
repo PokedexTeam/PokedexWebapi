@@ -14,7 +14,19 @@ services:
       - pokedex-net
     ports:
       - "3306:3306"
-
+      
+  migrator:
+    image: migrator
+    build:
+      context: .
+      dockerfile: MigrateDockerfile
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    networks:
+      - pokedex-net
+     
   pokedex.webapi:
     image: pokedex.webapi
     build:
