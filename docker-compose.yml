@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysql:
-    image: mysql:5.7.18
+    image: mysql:latest
     container_name: pokedex-mysql
     environment:
       MYSQL_ROOT_PASSWORD: "p4ssw0r#"

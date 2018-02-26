@@ -20,7 +20,7 @@
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
             Configuration = builder.Build();
 
-            var connectionString = args.FirstOrDefault() ?? Configuration["ConnectionStrings:DefaultConnection"];
+            var connectionString = args.FirstOrDefault() ?? Configuration["ConnectionStrings:MigrateConnection"];
 
             var upgrader =
                 DeployChanges.To

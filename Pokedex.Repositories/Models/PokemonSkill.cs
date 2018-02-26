@@ -3,7 +3,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("pokemonskills")]
     public class PokemonSkill : ISimpleModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
