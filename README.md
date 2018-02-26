@@ -13,5 +13,5 @@ Api to practice automated testing
 ## Install Docker
     # https://docs.docker.com/install/    
 ## Run Pokedex-Api
-    # 'git clone https://github.com/Saetabis1/Pokedex-Api.git' where you want to place repository
+    # 'git clone https://github.com/PokedexTeam/Pokedex-Api.git' where you want to place repository
     # Execute Run.sh file
