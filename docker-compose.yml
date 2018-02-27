@@ -5,16 +5,24 @@ services:
     image: mysql:latest
     container_name: pokedex-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "p4ssw0r#"
-      MYSQL_DATABASE: "pokedex"
-    volumes:
-      - ./mysql-data:/var/lib/mysql
-    restart: always
+       MYSQL_ROOT_PASSWORD: p4ssw0r#
+       MYSQL_DATABASE: pokedex
+       restart: always
     networks:
       - pokedex-net
     ports:
       - "3306:3306"
-
+      
+  migrator:
+    image: migrator
+    build:
+      context: .
+      dockerfile: MigrateDockerfile
+    links:
+      - mysql
+    networks:
+      - pokedex-net
+     
   pokedex.webapi:
     image: pokedex.webapi
     build:
@@ -28,8 +36,6 @@ services:
       - mysql
     networks:
       - pokedex-net
-volumes:
-  mysql-data:
 networks:
   pokedex-net:
     driver: bridge
