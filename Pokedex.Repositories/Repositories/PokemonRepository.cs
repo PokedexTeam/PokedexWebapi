@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class PokemonRepository : IRepository<Pokemon>
+    public class PokemonRepository
     {
         public readonly PokedexContext Db;
         public PokemonRepository(PokedexContext db)
@@ -16,7 +16,9 @@
 
         public async Task<Pokemon> FindOneById(int id)
         {
-            return await Db.Pokemons.Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
+            return await Db.Pokemons
+                .Where(x => x.Id.Equals(id))
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IList<Pokemon>> FindOneByAttribute(Pokemon value)

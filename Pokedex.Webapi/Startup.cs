@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Pokedex.Repositories;
@@ -19,7 +20,7 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<PokedexContext>(_ => new PokedexContext(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddDbContext<PokedexContext>(options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=pokedex;Trusted_Connection=True;ConnectRetryCount=0"));
             services.AddMvc();
 
             services.AddCors();

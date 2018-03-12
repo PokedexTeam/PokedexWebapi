@@ -1,7 +1,6 @@
 ﻿namespace Pokedex.Webapi.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Pokedex.Facades;
     using Pokedex.Repositories;
     using Pokedex.Repositories.Models;
     using System.Collections.Generic;
@@ -20,39 +19,47 @@
         [HttpGet]
         public IActionResult Get()
         {
-            var pokemonSkillFacade = new PokemonSkillFacade(Db);
-            return Json(pokemonSkillFacade.GetAll());
+            //var pokemonSkillFacade = new PokemonSkillFacade(Db);
+            //return Json(pokemonSkillFacade.GetAll());
+
+            return new OkResult();
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var pokemonSkillFacade = new PokemonSkillFacade(Db);
-            return Json(pokemonSkillFacade.Get(id));
+            //var pokemonSkillFacade = new PokemonSkillFacade(Db);
+            //return Json(pokemonSkillFacade.Get(id));
+
+            return new OkResult();
         }
 
         // POST api/values
         [HttpPost]
         public IActionResult Post([FromBody]List<PokemonSkill> values)
         {
-            var pokemonSkillFacade = new PokemonSkillFacade(Db);
-            pokemonSkillFacade.Insert(values);
-            return new OkObjectResult(values);
+            //var pokemonSkillFacade = new PokemonSkillFacade(Db);
+            //pokemonSkillFacade.Insert(values);
+            //return new OkObjectResult(values);
+
+            return new OkResult();
         }
 
         [HttpPatch]
         public IActionResult Patch([FromBody]List<PokemonSkill> values)
         {
-            var pokemonSkillFacade = new PokemonSkillFacade(Db);
-            pokemonSkillFacade.Update(values);
-            return new OkObjectResult(values);
+            //var pokemonSkillFacade = new PokemonSkillFacade(Db);
+            //pokemonSkillFacade.Update(values);
+            //return new OkObjectResult(values);
+
+            return new OkResult();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var pokemonSkillFacade = new PokemonSkillFacade(Db);
-            pokemonSkillFacade.Delete(id);
+            //var pokemonSkillFacade = new PokemonSkillFacade(Db);
+            //pokemonSkillFacade.Delete(id);
             return new OkResult();
         }
     }

@@ -1,10 +1,8 @@
 ﻿namespace Pokedex.Webapi.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Pokedex.Facades;
     using Pokedex.Repositories;
     using Pokedex.Repositories.Models;
-    using Pokedex.Webapi.Models;
     using System.Collections.Generic;
 
     [Route("[controller]")]
@@ -21,39 +19,47 @@
         [HttpGet]
         public IActionResult Get()
         {
-            var pokemonFacade = new PokemonFacade(Db);
-            return Json(pokemonFacade.GetAll());
+            // var pokemonFacade = new PokemonFacade(Db);
+            //return Json(pokemonFacade.GetAll());
+
+            return Ok();
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var pokemonFacade = new PokemonFacade(Db);
-            return Json(pokemonFacade.Get(id));
+            //var pokemonFacade = new PokemonFacade(Db);
+            //return Json(pokemonFacade.Get(id));
+
+            return Ok();
         }
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]List<PokemonResponse> values)
+        public IActionResult Post([FromBody]List<Pokemon> values)
         {
-            var pokemonFacade = new PokemonFacade(Db);
-            pokemonFacade.Insert(values);
-            return new OkObjectResult(values);
+            //var pokemonFacade = new PokemonFacade(Db);
+            //pokemonFacade.Insert(values);
+            //return new OkObjectResult(values);
+
+            return Ok();
         }
 
         [HttpPatch]
-        public IActionResult Patch([FromBody]List<PokemonResponse> values)
+        public IActionResult Patch([FromBody]List<Pokemon> values)
         {
-            var pokemonFacade = new PokemonFacade(Db);
-            pokemonFacade.Update(values);
-            return new OkObjectResult(values);
+            //var pokemonFacade = new PokemonFacade(Db);
+            //pokemonFacade.Update(values);
+            //return new OkObjectResult(values);
+
+            return Ok();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var pokemonFacade = new PokemonFacade(Db);
-            pokemonFacade.Delete(id);
+            //var pokemonFacade = new PokemonFacade(Db);
+            //pokemonFacade.Delete(id);
             return new OkResult();
         }
     }

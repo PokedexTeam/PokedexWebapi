@@ -7,7 +7,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class PokemonSkillRepository : IRepository<PokemonSkill>
+    public class PokemonSkillRepository
     {
         public readonly PokedexContext Db;
         public PokemonSkillRepository(PokedexContext db)

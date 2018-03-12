@@ -7,7 +7,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class PokemonTypeRepository : IRepository<PokemonType>
+    public class PokemonTypeRepository 
     {
         public readonly PokedexContext Db;
         public PokemonTypeRepository(PokedexContext db)
