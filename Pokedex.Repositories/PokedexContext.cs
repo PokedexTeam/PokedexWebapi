@@ -11,20 +11,37 @@
 
         public DbSet<Pokemon> Pokemons { get; set; }
 
-        public DbSet<PokemonToPokemonSkill> PokemonToPokemonSkills { get; set; }
+        public PokedexContext(DbContextOptions<PokedexContext> options)
+          : base(options)
+        { }
 
-        public DbSet<PokemonToPokemonType> PokemonToPokemonTypes { get; set; }
-
-        private string ConnectionString;
-
-        public PokedexContext(string con)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            ConnectionString = con;
-        }
+            modelBuilder.Entity<PokemonToPokemonSkill>()
+                .HasKey(t => new { t.PokemonId, t.PokemonSkillId });
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseMySQL(ConnectionString);
+            modelBuilder.Entity<PokemonToPokemonSkill>()
+                .HasOne(pt => pt.Pokemon)
+                .WithMany(p => p.PokemonToPokemonSkills)
+                .HasForeignKey(pt => pt.PokemonId);
+
+            modelBuilder.Entity<PokemonToPokemonSkill>()
+                .HasOne(pt => pt.PokemonSkill)
+                .WithMany(t => t.PokemonToPokemonSkills)
+                .HasForeignKey(pt => pt.PokemonSkillId);
+
+            modelBuilder.Entity<PokemonToPokemonType>()
+                .HasKey(t => new { t.PokemonId, t.PokemonTypeId });
+
+            modelBuilder.Entity<PokemonToPokemonType>()
+                .HasOne(pt => pt.Pokemon)
+                .WithMany(p => p.PokemonToPokemonTypes)
+                .HasForeignKey(pt => pt.PokemonId);
+
+            modelBuilder.Entity<PokemonToPokemonType>()
+                .HasOne(pt => pt.PokemonType)
+                .WithMany(t => t.PokemonToPokemonTypes)
+                .HasForeignKey(pt => pt.PokemonTypeId);
         }
     }
 }

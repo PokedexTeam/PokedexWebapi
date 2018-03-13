@@ -2,10 +2,16 @@
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using MySql.Data.MySqlClient;
     using Pokedex.Repositories;
+    using Pokedex.Repositories.Repositories;
     using Swashbuckle.AspNetCore.Swagger;
+    using System;
+    using System.Linq;
+    using System.Threading;
 
     public class Startup
     {
@@ -19,7 +25,11 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<PokedexContext>(_ => new PokedexContext(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddDbContext<PokedexContext>(options => options.UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddTransient<PokemonRepository>();
+            services.AddTransient<PokemonSkillRepository>();
+            services.AddTransient<PokemonTypeRepository>();
+
             services.AddMvc();
 
             services.AddCors();
@@ -57,6 +67,8 @@
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<PokedexContext>();
+
+                    context.Database.Migrate();
             }
 
             app.UseMvc();

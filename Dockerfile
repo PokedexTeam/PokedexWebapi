@@ -7,7 +7,6 @@ WORKDIR /src
 COPY *.sln ./
 COPY Pokedex.Webapi/Pokedex.Webapi.csproj Pokedex.Webapi/
 COPY Pokedex.Repositories/Pokedex.Repositories.csproj Pokedex.Repositories/
-COPY Pokedex.Facades/Pokedex.Facades.csproj Pokedex.Facades/
 RUN dotnet restore
 COPY . .
 WORKDIR /src/Pokedex.Webapi

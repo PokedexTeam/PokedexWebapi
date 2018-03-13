@@ -2,12 +2,11 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Pokedex.Repositories.Models;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class PokemonSkillRepository : IRepository<PokemonSkill>
+    public class PokemonSkillRepository
     {
         public readonly PokedexContext Db;
         public PokemonSkillRepository(PokedexContext db)
@@ -15,17 +14,17 @@
             Db = db;
         }
 
-        public async Task<PokemonSkill> FindOneById(int id)
+        public async Task<PokemonSkill> Get(int id)
         {
             return await Db.PokemonSkills.Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
         }
 
-        public async Task<IList<PokemonSkill>> GetAll()   
+        public async Task<IList<PokemonSkill>> Get()   
         {
             return await Db.PokemonSkills.ToListAsync();
         }
 
-        public async Task<IList<PokemonSkill>> FindOneByAttribute(PokemonSkill pokemonSkill)
+        public async Task<IList<PokemonSkill>> Get(PokemonSkill pokemonSkill)
         {
             return await Db.PokemonSkills.Where(x => x.Name.Equals(pokemonSkill.Name) || x.Id.Equals(pokemonSkill.Id)).ToListAsync();
         }

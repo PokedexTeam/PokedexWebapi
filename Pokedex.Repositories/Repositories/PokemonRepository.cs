@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class PokemonRepository : IRepository<Pokemon>
+    public class PokemonRepository : IRepository
     {
         public readonly PokedexContext Db;
         public PokemonRepository(PokedexContext db)
@@ -14,12 +14,19 @@
             Db = db;
         }
 
-        public async Task<Pokemon> FindOneById(int id)
+        public async Task<Pokemon> Get(int id)
         {
-            return await Db.Pokemons.Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
+            return await Db.Pokemons
+                .Where(x => x.Id.Equals(id))
+                .FirstOrDefaultAsync();
         }
 
-        public async Task<IList<Pokemon>> FindOneByAttribute(Pokemon value)
+        public async Task<IList<Pokemon>> Get()
+        {
+            return await Db.Pokemons.ToListAsync();
+        }
+
+        public async Task<IList<Pokemon>> Get(Pokemon value)
         {
             return await Db.Pokemons.Where(x =>
                             x.Name.Equals(value.Name) ||
@@ -30,11 +37,6 @@
                             x.BaseSpAtk.Equals(value.Id) ||
                             x.BaseSpeed.Equals(value.Id))
                             .ToListAsync();
-        }
-
-        public async Task<IList<Pokemon>> GetAll()
-        {
-            return await Db.Pokemons.ToListAsync();
         }
 
         public void Insert(Pokemon value)
