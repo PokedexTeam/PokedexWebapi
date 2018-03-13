@@ -1,18 +1,16 @@
 echo "Composing infrastructure"
 docker-compose up -d --force-recreate --build
-sleep 5
+sleep 10
 
-echo "Start Migrations"
-docker start pokedexwebapi_migrator_1
-
-STATUS=$(exec docker ps -a --filter "name=pokedexwebapi_migrator_1" --format '{{.Status}}')
-while [[ $STATUS != *"Exited"* ]]; do
-	echo $STATUS "migrating"
-	sleep 1
-	STATUS=$(exec docker ps -a --filter "name=pokedexwebapi_migrator_1" --format '{{.Status}}')
+STATUS=$(exec docker ps -a --filter "name=pokedexwebapi_webapi_1" --format '{{.Status}}')
+while [[ $STATUS == *"Exited"* ]]; do
+	echo "Starting"
+	docker start pokedexwebapi_webapi_1
+	sleep 2
+	STATUS=$(exec docker ps -a --filter "name=pokedexwebapi_webapi_1" --format '{{.Status}}')
 done
 
-echo "Migration finished"
+echo "Start finished"
 echo " "
 echo "    APP READY TO USE. HAVE A NICE DAY      "
 echo "                    ##        .            "

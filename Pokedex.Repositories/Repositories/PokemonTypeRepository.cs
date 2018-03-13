@@ -15,17 +15,17 @@
             Db = db;
         }
 
-        public async Task<PokemonType> FindOneById(int id)
+        public async Task<PokemonType> Get(int id)
         {
             return await Db.PokemonTypes.Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
         }
 
-        public async Task<IList<PokemonType>> GetAll()   
+        public async Task<IList<PokemonType>> Get()   
         {
             return await Db.PokemonTypes.ToListAsync();
         }
 
-        public async Task<IList<PokemonType>> FindOneByAttribute(PokemonType pType)
+        public async Task<IList<PokemonType>> Get(PokemonType pType)
         {
             return await Db.PokemonTypes.Where(x => x.Name.Equals(pType.Name) || x.Id.Equals(pType.Id)).ToListAsync();
         }

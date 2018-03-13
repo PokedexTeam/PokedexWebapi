@@ -1,6 +1,0 @@
-FROM microsoft/aspnetcore-build AS build	
-WORKDIR /
-COPY Pokedex.Repositories/Pokedex.Repositories.csproj .
-COPY Pokedex.Repositories/ .
-RUN dotnet build
-ENTRYPOINT ["dotnet", "ef database update"]

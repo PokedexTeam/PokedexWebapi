@@ -1,44 +1,29 @@
-version: '3.3'
+version: '3'
 
 services:
-    db:
-        image: database
-        build:
-          context: ./
-          dockerfile: DatabaseDockerfile
-        ports:
-          - "1433:1433"
+    mysql:
+        image: mysql:latest
+        container_name: pokedex-mysql
         environment:
-          SA_PASSWORD: "Alaska2017"
-          ACCEPT_EULA: "Y"
-        healthcheck:
-          test: sqlcmd -S dev.network.com -U SA -P 'Alaska2017' -Q 'select 1'
+          MYSQL_ROOT_PASSWORD: p4ssw0r#
+          MYSQL_DATABASE: pokedex
+          restart: always
         networks:
-          - pokedex-net
-          
-    migrator:
-        image: migrator
-        build:
-          context: ./
-          dockerfile: MigratorDockerfile
-        depends_on:
-          - db
-        links:
-          - db
-        networks:
-            - pokedex-net
-                     
+         - pokedex-net
+        ports:
+         - "3306:3306"
+         
     webapi:
         image: webapi
         build:
           context: ./
-          dockerfile: WebapiDockerfile
+          dockerfile: Dockerfile
         ports:
           - "5000:80"
         depends_on:
-          - db
+          - mysql
         links:
-          - db
+          - mysql
         networks:
           - pokedex-net
       

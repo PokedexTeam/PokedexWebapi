@@ -1,65 +1,75 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace Pokedex.Repositories.Migrations
 {
-    public partial class initialCreate : Migration
+    public partial class initDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.Sql("DROP TABLE IF EXISTS `PokemonToPokemonType`;");
+            migrationBuilder.Sql("DROP TABLE IF EXISTS `PokemonToPokemonSkill`;");
+            migrationBuilder.Sql("DROP TABLE IF EXISTS `Pokemons`;");
+            migrationBuilder.Sql("DROP TABLE IF EXISTS `PokemonSkills`;");
+            migrationBuilder.Sql("DROP TABLE IF EXISTS `PokemonTypes`;");
+
             migrationBuilder.CreateTable(
                 name: "Pokemons",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BaseAttack = table.Column<int>(type: "int", nullable: false),
-                    BaseDefense = table.Column<int>(type: "int", nullable: false),
-                    BaseHP = table.Column<int>(type: "int", nullable: false),
-                    BaseSpAtk = table.Column<int>(type: "int", nullable: false),
-                    BaseSpDef = table.Column<int>(type: "int", nullable: false),
-                    BaseSpeed = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    BaseAttack = table.Column<int>(nullable: false),
+                    BaseDefense = table.Column<int>(nullable: false),
+                    BaseHP = table.Column<int>(nullable: false),
+                    BaseSpAtk = table.Column<int>(nullable: false),
+                    BaseSpDef = table.Column<int>(nullable: false),
+                    BaseSpeed = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pokemons", x => x.Id);
                 });
 
+            
+
             migrationBuilder.CreateTable(
                 name: "PokemonSkills",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PokemonSkills", x => x.Id);
                 });
 
+            
+
             migrationBuilder.CreateTable(
                 name: "PokemonTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PokemonTypes", x => x.Id);
                 });
 
+            
+
             migrationBuilder.CreateTable(
                 name: "PokemonToPokemonSkill",
                 columns: table => new
                 {
-                    PokemonId = table.Column<int>(type: "int", nullable: false),
-                    PokemonSkillId = table.Column<int>(type: "int", nullable: false)
+                    PokemonId = table.Column<int>(nullable: false),
+                    PokemonSkillId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,12 +88,14 @@ namespace Pokedex.Repositories.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            
+
             migrationBuilder.CreateTable(
                 name: "PokemonToPokemonType",
                 columns: table => new
                 {
-                    PokemonId = table.Column<int>(type: "int", nullable: false),
-                    PokemonTypeId = table.Column<int>(type: "int", nullable: false)
+                    PokemonId = table.Column<int>(nullable: false),
+                    PokemonTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

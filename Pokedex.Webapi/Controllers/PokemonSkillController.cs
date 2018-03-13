@@ -1,65 +1,52 @@
 ﻿namespace Pokedex.Webapi.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Pokedex.Repositories;
     using Pokedex.Repositories.Models;
+    using Pokedex.Repositories.Repositories;
     using System.Collections.Generic;
 
     [Route("[controller]")]
     public class PokemonSkillController : Controller
     {
+        private PokemonSkillRepository Repository;
 
-        private PokedexContext Db;
-
-        public PokemonSkillController(PokedexContext db)
+        public PokemonSkillController(PokemonSkillRepository repository)
         {
-            Db = db;
+            Repository = repository;
         }
         
         [HttpGet]
         public IActionResult Get()
         {
-            //var pokemonSkillFacade = new PokemonSkillFacade(Db);
-            //return Json(pokemonSkillFacade.GetAll());
-
-            return new OkResult();
+            return Json(Repository.Get());
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            //var pokemonSkillFacade = new PokemonSkillFacade(Db);
-            //return Json(pokemonSkillFacade.Get(id));
-
-            return new OkResult();
+            return Json(Repository.Get(id));
         }
 
         // POST api/values
         [HttpPost]
         public IActionResult Post([FromBody]List<PokemonSkill> values)
         {
-            //var pokemonSkillFacade = new PokemonSkillFacade(Db);
-            //pokemonSkillFacade.Insert(values);
-            //return new OkObjectResult(values);
-
-            return new OkResult();
+            values.ForEach(x => Repository.Insert(x));
+            return new OkObjectResult(values);
         }
 
         [HttpPatch]
         public IActionResult Patch([FromBody]List<PokemonSkill> values)
         {
-            //var pokemonSkillFacade = new PokemonSkillFacade(Db);
-            //pokemonSkillFacade.Update(values);
-            //return new OkObjectResult(values);
-
-            return new OkResult();
+            values.ForEach(x => Repository.Update(x));
+            return new OkObjectResult(values);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            //var pokemonSkillFacade = new PokemonSkillFacade(Db);
-            //pokemonSkillFacade.Delete(id);
+            var skill = Repository.Get(id).Result;
+            Repository.Delete(skill);
             return new OkResult();
         }
     }

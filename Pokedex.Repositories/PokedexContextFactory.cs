@@ -19,7 +19,7 @@
 
             var contextOptionsBuilder = new DbContextOptionsBuilder<PokedexContext>();
 
-            contextOptionsBuilder.UseSqlServer(connectionString);
+            contextOptionsBuilder.UseMySql(connectionString);
 
             return new PokedexContext(contextOptionsBuilder.Options);
         }
