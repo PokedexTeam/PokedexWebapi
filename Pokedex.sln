@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Repositories", "Pok
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Webapi.Tests", "Pokedex.Webapi.Tests\Pokedex.Webapi.Tests.csproj", "{93DD7E5E-3135-4CDE-87B2-D7D08A3E6053}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F0616A53-60F0-4A3C-922F-F27E4A5A9D29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{93DD7E5E-3135-4CDE-87B2-D7D08A3E6053} = {F0616A53-60F0-4A3C-922F-F27E4A5A9D29}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FB7F0A7A-077D-40FA-A648-57A2F19D9CFB}
